@@ -20,15 +20,70 @@
     <div class="container">
       <section id="main_content">
 
-        <h3 id="markdown">Title</h3>
+        <h3>Second Life JS Engine</h3>
+        <p>An JS engine for SL</p>
+        
+        <h3>Connection</h3>
+        <p id="status" style="color: red;">Awaiting connection...</p>
 
-        <p>Text</p>
-
+        <h3>Output</h3>
         <pre class="highlight">
-          <code>
-              Syntax highlighted code block
-          </code>
+          <code id="output">Syntax highlighted code block</code>
         </pre>
+        
+        <script id="remote"></script>
+        
+        <script>
+          var url,
+              to,
+              script = document.getElementById('remote');
+          
+          function output(text)
+          {
+            var panel = document.getElementById('output');
+            panel.textContent = text;
+          }
+          
+          function fetchRemote()
+          {
+            if (to)
+            {
+              clearTimeout(to);
+              to = undefined;
+            }
+            
+            script.src = url;
+          }
+          
+          function timedFetchRemote(time = 2000)
+          {
+            if (to)
+            {
+              clearTimeout(to);
+            }
+            
+            to = setTimeout(fetchRemote, time);
+          }
+          
+          function onHashChange()
+          {
+            url = location.hash.substring(1);
+            document.getElementById('status').textContent = url ? 'Connected!' : 'Awaiting connection...';
+            
+            if (url) fetchRemote();
+          }
+          
+          script.addEventListener('load', function() {
+            if (url) fetchRemote();
+          });
+          
+          script.addEventListener('error', function() {
+            if (url) timedFetchRemote(2000);
+          });
+          
+          window.addEventListener("hashchange", onHashChange, false);
+          onHashChange();
+        </script>
         
       </section>
     </div>
