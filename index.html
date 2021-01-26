@@ -47,15 +47,15 @@
           function fetchRemote()
           {
             var script = document.createElement('script');
-            //remotes.appendChild(script);
+            remotes.appendChild(script);
             
             script.addEventListener('load', function() {
-              //remotes.removeChild(script);
+              remotes.removeChild(script);
               fetchRemote();
             });
 
             script.addEventListener('error', function() {
-              //remotes.removeChild(script);
+              remotes.removeChild(script);
               fetchRemote();
             });
             
