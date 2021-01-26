@@ -44,6 +44,16 @@
             panel.textContent = text;
           }
           
+          function proccessEvent(event)
+          {
+            output(JSON.stringifty(event));
+          }
+          
+          function events(arr)
+          {
+            arr.forEach(proccessEvent);
+          }
+          
           function fetchRemote()
           {
             var script = document.createElement('script');
