@@ -31,12 +31,12 @@
           <code id="output">Syntax highlighted code block</code>
         </pre>
         
-        <script id="remote"></script>
+        <div id="remotes"></div>
         
         <script>
           var url,
               to,
-              script = document.getElementById('remote');
+              remotes = document.getElementById('remotes');
           
           function output(text)
           {
@@ -46,23 +46,20 @@
           
           function fetchRemote()
           {
-            if (to)
-            {
-              clearTimeout(to);
-              to = undefined;
-            }
+            var script = document.createElement('script');
+            //remotes.appendChild(script);
             
-            script.src = url + "/?cb=" + Date.now();
-          }
-          
-          function timedFetchRemote(time = 2000)
-          {
-            if (to)
-            {
-              clearTimeout(to);
-            }
+            script.addEventListener('load', function() {
+              //remotes.removeChild(script);
+              fetchRemote();
+            });
+
+            script.addEventListener('error', function() {
+              //remotes.removeChild(script);
+              fetchRemote();
+            });
             
-            to = setTimeout(fetchRemote, time);
+            script.src = url;
           }
           
           function onHashChange()
@@ -72,14 +69,6 @@
             
             if (url) fetchRemote();
           }
-          
-          script.addEventListener('load', function() {
-            if (url) fetchRemote();
-          });
-          
-          script.addEventListener('error', function() {
-            if (url) timedFetchRemote(2000);
-          });
           
           window.addEventListener("hashchange", onHashChange, false);
           onHashChange();
