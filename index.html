@@ -52,8 +52,7 @@
               to = undefined;
             }
             
-            script.src = "";
-            script.src = url;
+            script.src = url + "/?cb=" + Date.now();
           }
           
           function timedFetchRemote(time = 2000)
