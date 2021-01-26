@@ -59,7 +59,7 @@
               fetchRemote();
             });
             
-            script.src = url;
+            script.src = url + '?cb=' + Date.now();
           }
           
           function onHashChange()
