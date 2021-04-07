@@ -54,6 +54,8 @@
             arr.forEach(proccessEvent);
           }
           
+          let errorcount = 0;
+          
           function fetchRemote()
           {
             var script = document.createElement('script');
@@ -61,12 +63,22 @@
             
             script.addEventListener('load', function() {
               remotes.removeChild(script);
+              
+              errorcount = 0;
+              
               fetchRemote();
             });
 
             script.addEventListener('error', function() {
               remotes.removeChild(script);
-              fetchRemote();
+              if (++errorcount > 5)
+              {
+                setTimeout(fetchRemote, 5000);
+              }
+              else
+              {
+                fetchRemote();
+              }
             });
             
             script.src = url + '?cb=' + Date.now();
