@@ -21,7 +21,7 @@ const func = new Proxy({ }, {
   get: function(target, prop, receiver) {
     if (mapping[prop])
     {
-      reutrn function() { return doAction.apply(null, [mapping[prop], ...arguments]); };
+      return function() { return doAction.apply(null, [mapping[prop], ...arguments]); };
     }
     else
     {
