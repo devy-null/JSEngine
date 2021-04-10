@@ -10,10 +10,10 @@ function doAction(name)
 {
   return fetch('action', {
     'method': 'POST',
-    'body': {
+    'body': JSON.stringify({
       'n': name,
       'a': Array.from(arguments).slice(1)
-    }
+    })
   }).then(r => r.json());
 }
 
