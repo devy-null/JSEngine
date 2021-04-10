@@ -1,4 +1,34 @@
-let panel = document.getElementById('output');
+const panel = document.getElementById('output');
+const mapping = { };
+
+function setMapping(data)
+{
+  Object.assign(mapping, data);
+}
+
+function doAction(name)
+{
+  return fetch('action', {
+    'method': 'POST',
+    'body': {
+      'n': name,
+      'a': arguments.slice(1)
+    }
+  }).then(r => r.json());
+}
+
+const func = new Proxy({ }, {
+  get: function(target, prop, receiver) {
+    if (mapping[prop])
+    {
+      reutrn function() { return doAction.apply(null, [mapping[prop], ...arguments]); };
+    }
+    else
+    {
+      throw "Unknown function!"; 
+    }
+  }
+});
 
 function output(text)
 {
@@ -55,7 +85,9 @@ function act()
 
 function hello()
 {
-  fetch('action', { 'method': 'POST', body: '{ \"n\": \"71\", \"a\": [\"Hellow worldz\"] }' });
+  func.llOwnerSay('Hi there!');
+  
+  //fetch('action', { 'method': 'POST', body: '{ \"n\": \"71\", \"a\": [\"Hellow worldz\"] }' });
 }
 
 fetchRemote();
