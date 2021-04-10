@@ -90,4 +90,5 @@ function hello()
   //fetch('action', { 'method': 'POST', body: '{ \"n\": \"71\", \"a\": [\"Hellow worldz\"] }' });
 }
 
+output('Connected!');
 fetchRemote();
