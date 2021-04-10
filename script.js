@@ -55,7 +55,6 @@ function fetchRemote()
   script.addEventListener('load', function() {
     document.body.removeChild(script);
 
-    panel.textContent += 'ok'; 
     errorcount = 0;
 
     fetchRemote();
@@ -63,8 +62,6 @@ function fetchRemote()
 
   script.addEventListener('error', function() {
     document.body.removeChild(script);
-    
-    panel.textContent += 'er'; 
     
     if (++errorcount > 5)
     {
@@ -80,7 +77,8 @@ function fetchRemote()
 }
 function act()
 {
-  fetch('action', { 'method': 'POST', body: '{ \"n\": \"3x\", \"a\": [] }' }).then(r => r.text()).then(j => output(j));
+  //fetch('action', { 'method': 'POST', body: '{ \"n\": \"3x\", \"a\": [] }' }).then(r => r.text()).then(j => output(j));
+  func.llListReplaceList([1,2,3,4,5], [20, 30], 1, 2);
 }
 
 function hello()
