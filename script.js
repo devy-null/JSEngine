@@ -12,7 +12,7 @@ function doAction(name)
     'method': 'POST',
     'body': {
       'n': name,
-      'a': arguments.slice(1)
+      'a': Array.from(arguments).slice(1)
     }
   }).then(r => r.json());
 }
