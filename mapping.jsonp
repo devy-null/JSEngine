@@ -1,4 +1,4 @@
-{
+setMapping({
 	"llAbs": "0",
 	"llAcos": "1",
 	"llAddToLandBanList": "2",
@@ -427,4 +427,4 @@
 	"llXorBase64": "bt",
 	"llXorBase64Strings": "bu",
 	"llXorBase64StringsCorrect": "bv"
-}
+});
